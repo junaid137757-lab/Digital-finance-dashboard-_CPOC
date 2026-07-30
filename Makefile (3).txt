@@ -1,0 +1,49 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -Iinclude
+SRC = src/main.c src/globals.c src/utility.c src/notification.c \
+      src/authentication.c src/persistence.c src/income.c src/expense.c \
+      src/transaction.c src/budget.c src/savings_goal.c src/dashboard.c \
+      src/reports.c src/recommendation.c
+TARGET = financeapp
+
+
+# --- CUnit unit tests ------------------------------------------------
+# Requires libcunit1-dev (Debian/Ubuntu: apt install libcunit1-dev
+# | macOS: brew install cunit). Tests link every module's .c file
+# except main.c (which owns the interactive menu loop / the real
+# main()) together with the files under tests/.
+
+APP_SRC_NO_MAIN = src/globals.c src/utility.c src/notification.c \
+      src/authentication.c src/persistence.c src/income.c src/expense.c \
+      src/transaction.c src/budget.c src/savings_goal.c src/dashboard.c \
+      src/reports.c src/recommendation.c
+
+TEST_SRC = tests/test_runner.c tests/test_helpers.c \
+      tests/test_utility.c tests/test_notification.c tests/test_budget.c \
+      tests/test_persistence.c tests/test_authentication.c \
+      tests/test_income.c tests/test_expense.c tests/test_transaction.c \
+      tests/test_savings_goal.c tests/test_reports.c \
+      tests/test_recommendation.c tests/test_dashboard.c
+
+TEST_TARGET = run_tests
+
+.PHONY: all clean test run unit-test
+
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+	$(CC) $(SRC) $(CFLAGS) -o $(TARGET)
+
+run: all
+	./$(TARGET)
+
+test: all
+	chmod +x test.sh
+	./test.sh
+
+unit-test:
+	$(CC) $(APP_SRC_NO_MAIN) $(TEST_SRC) $(CFLAGS) -Itests -lcunit -o $(TEST_TARGET)
+	./$(TEST_TARGET)
+
+clean:
+	rm -f $(TARGET) $(TEST_TARGET) *.dat
