@@ -12,7 +12,7 @@ void getCurrentDate(char *buffer)
     strftime(buffer, 11, "%Y-%m-%d", tm_info);
 }
 
-void clearInputBuffer()
+void clearInputBuffer(void)
 {
     int c;
 

@@ -7,7 +7,7 @@ void getCurrentDate(char *buffer);
    entry) up to the next newline, so a failed or partial scanf
    can never cascade into the next prompt. Call this right
    after every scanf() in the project. */
-void clearInputBuffer();
+void clearInputBuffer(void);
 
 /* Reads a full line (spaces allowed) into buffer, up to size-1
    characters, and strips the trailing newline. Use this instead

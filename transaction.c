@@ -7,7 +7,7 @@
 #include "budget.h"
 #include "utility.h"
 
-void viewTransactions()
+void viewTransactions(void)
 {
     int i;
     float balance = 0;
@@ -42,7 +42,7 @@ void viewTransactions()
     printf("Running Balance (Total Income - Total Expense): %.2f\n", balance);
 }
 
-void editTransaction()
+void editTransaction(void)
 {
     int id, i, found = -1;
     char newCategory[30];
@@ -110,7 +110,7 @@ void editTransaction()
         checkBudgetAlert(transactions[found].category);
 }
 
-void deleteTransaction()
+void deleteTransaction(void)
 {
     int id, i, found = -1;
 
@@ -155,7 +155,7 @@ void deleteTransaction()
     printf("Transaction Deleted Successfully!\n");
 }
 
-void searchTransactionsByCategory()
+void searchTransactionsByCategory(void)
 {
     char category[30];
     int i, found = 0;
